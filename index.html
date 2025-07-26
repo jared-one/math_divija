@@ -1,189 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- 1. Metadata and SEO -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parabola Reflection Explained</title>
+    <title>Geometric Problem: Area Ratio of Nonagons</title>
+    <meta name="description" content="A detailed step-by-step solution to the geometric problem of finding the area ratio between two regular nonagons.">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Geometric Problem: Area Ratio of Nonagons">
+    <meta property="og:description" content="A detailed step-by-step solution to the geometric problem of finding the area ratio between two regular nonagons.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="#"> <!-- Placeholder for actual URL -->
+    <meta property="og:image" content="#"> <!-- Placeholder for an image of the diagram -->
+
+    <!-- 2. Styling and Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,400;600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Mathematical Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" xintegrity="sha384-sCutEFUTflVtb9CzdCCB1T2BscV1N2u5a+Ipc2kjkN1Sdsf23x2p9e9m2TYL2Q9M" crossorigin="anonymous">
+
     <style>
-        /* --- Basic Styling --- */
+        /* CSS for styling the page */
+        :root {
+            --color-background: #fdfdfd;
+            --color-surface: #ffffff;
+            --color-text: #2c3e50;
+            --color-heading: #2c3e50;
+            --color-primary: #3498db;
+            --color-primary-dark: #2980b9;
+            --color-accent: #e67e22;
+            --color-border: #ecf0f1;
+            
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            --font-heading: 'Source Serif 4', 'Georgia', serif;
+            
+            --border-radius: 8px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f0f2f5;
-            color: #333;
+            font-family: var(--font-body);
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.7;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
+            padding: 2rem 1rem;
         }
-
-        /* --- Main Container --- */
-        .container {
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            max-width: 700px;
+        .main-container {
             width: 100%;
-            padding: 25px 35px;
-            border-top: 5px solid #6c5ce7;
+            max-width: 800px;
+            background-color: var(--color-surface);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--color-border);
+            overflow: hidden;
         }
-
-        /* --- Typography --- */
-        h2 {
-            font-size: 24px;
-            color: #333;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        h3 {
-            font-size: 20px;
-            color: #6c5ce7;
-            margin-top: 25px;
-            margin-bottom: 10px;
-            border-bottom: 2px solid #e0e0e0;
-            padding-bottom: 5px;
-        }
-
-        p, li {
-            font-size: 16px;
-            line-height: 1.6;
-        }
-
-        code {
-            background-color: #eef1f5;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: "Courier New", Courier, monospace;
-            font-size: 0.95em;
-        }
-
-        .final-answer {
-            background-color: #e8f5e9;
-            border-left: 4px solid #4caf50;
-            padding: 15px;
-            margin: 20px 0;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        /* --- Interactive Elements --- */
-        .toggle-button {
-            background-color: #6c5ce7;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            margin-top: 10px;
-            transition: background-color 0.2s;
-        }
-        .toggle-button:hover {
-            background-color: #594bb3;
-        }
-        .derivation {
-            background-color: #fafafa;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 15px;
-            margin-top: 15px;
-            display: none; /* Hidden by default */
+        header { padding: 2rem; background-color: var(--color-primary); color: white; }
+        header h1 { font-family: var(--font-heading); font-size: 1.8rem; line-height: 1.2; margin-bottom: 0.5rem; }
+        header p { font-size: 1rem; opacity: 0.9; }
+        main { padding: 2rem; }
+        .solution-summary, .derivation { margin-bottom: 2.5rem; }
+        .section-title { font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-heading); border-bottom: 2px solid var(--color-primary); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        .final-answer { background-color: #eaf5fd; border-left: 5px solid var(--color-primary); padding: 1.5rem; margin: 1.5rem 0; border-radius: 0 var(--border-radius) var(--border-radius) 0; }
+        .final-answer p { margin-bottom: 1rem; }
+        .final-expression { font-weight: 600; color: var(--color-primary-dark); text-align: center; font-size: 1.2em; }
+        .steps { list-style: none; counter-reset: steps-counter; }
+        .step { display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--color-border); }
+        .step:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .step-number { counter-increment: steps-counter; display: flex; justify-content: center; align-items: center; flex-shrink: 0; width: 40px; height: 40px; background-color: var(--color-accent); color: white; font-weight: 700; border-radius: 50%; font-size: 1.2rem; }
+        .step-number::before { content: counter(steps-counter); }
+        .step-content h4 { font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--color-heading); }
+        .toggle-button { display: inline-flex; align-items: center; gap: 0.5rem; background-color: var(--color-primary); color: white; border: none; padding: 0.75rem 1.5rem; font-size: 1rem; font-weight: 600; border-radius: var(--border-radius); cursor: pointer; transition: background-color 0.2s ease, transform 0.2s ease; }
+        .toggle-button:hover, .toggle-button:focus-visible { background-color: var(--color-primary-dark); transform: translateY(-2px); outline: 2px solid var(--color-primary-dark); outline-offset: 2px; }
+        .toggle-button .icon { transition: transform 0.3s ease-in-out; }
+        .details-container { overflow: hidden; transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease; max-height: 2000px; opacity: 1; }
+        .details-container.collapsed { max-height: 0; opacity: 0; }
+        .katex-display { margin: 1em 0; }
+        .katex { font-size: 1.2em !important; }
+        footer { text-align: center; margin-top: 2rem; font-size: 0.9rem; color: #7f8c8d; }
+        @media (max-width: 600px) {
+            body { padding: 1rem 0.5rem; }
+            header, main { padding: 1.5rem; }
+            header h1 { font-size: 1.5rem; }
+            .section-title { font-size: 1.3rem; }
+            .step { flex-direction: column; align-items: stretch; }
+            .step-number { align-self: flex-start; margin-bottom: 0.5rem; }
         }
     </style>
 </head>
+
 <body>
 
-    <div class="container">
-        <h2>Parabola Reflection Explained 📝</h2>
-        <p class="final-answer">
-            The correct equation is: <code>x = y<sup>2</sup> &minus; 4y + 2</code>
-        </p>
+    <div class="main-container">
+        <header>
+            <h1>Geometric Problem Analysis</h1>
+            <p>Finding the Area Ratio of Nested Regular Polygons</p>
+        </header>
 
-        <div class="step">
-            <h3>Step 1: Understand the Reflection</h3>
-            <p>
-                Let's take any point (x<sub>0</sub>, y<sub>0</sub>) on the original parabola, <code>y = x<sup>2</sup></code>. Its reflection across the line <code>y = x + 2</code> will be a new point, (x, y). Our goal is to find a formula that connects x and y.
-            </p>
-            <p>
-                This reflection has two key properties:
-            </p>
-            <ul>
-                <li>The line connecting the original point and its reflection is <b>perpendicular</b> to the line of reflection.</li>
-                <li>The <b>midpoint</b> between the two points lies on the line of reflection.</li>
-            </ul>
-        </div>
+        <main>
+            <section class="solution-summary">
+                <h2 class="section-title">Problem Summary & Result</h2>
+                <p>The problem asks for the fraction of the area of a regular nonagon $N$ that is covered by a smaller, inner nonagon $S$, which is formed by drawing line segments at each vertex of $N$ perpendicular to the preceding edge.</p>
+                <div class="final-answer">
+                    <p>The final ratio of Area($S$) to Area($N$) is:</p>
+                    <div class="final-expression">
+                        \[ \frac{\text{Area}(S)}{\text{Area}(N)} = \frac{1 - \cos 40^\circ}{1 + \cos 40^\circ} \]
+                    </div>
+                </div>
+            </section>
 
-        <div class="step">
-            <h3>Step 2: Use the Properties to Create Equations</h3>
-            <p>
-                From the properties above, we can find a general transformation rule. For a reflection across the line <code>y = x + 2</code>, any point (x<sub>0</sub>, y<sub>0</sub>) is transformed into a new point (x, y) using these specific formulas:
-            </p>
-            <ul>
-                <li><code>x<sub>0</sub> = y &minus; 2</code></li>
-                <li><code>y<sub>0</sub> = x + 2</code></li>
-            </ul>
-            <p>
-                These formulas tell us how to find the original point's coordinates if we know the reflected point's coordinates.
-            </p>
-            <button id="toggleBtn" class="toggle-button">Why these formulas? (Show Derivation)</button>
-            <div id="derivation" class="derivation">
-                <p>These formulas come from solving a system of equations based on the two properties from Step 1:</p>
-                <ol>
-                    <li><b>Perpendicular Slope:</b> The slope of <code>y = x + 2</code> is 1. A perpendicular line has a slope of -1. So, (y - y<sub>0</sub>) / (x - x<sub>0</sub>) = -1, which simplifies to <code>x + y = x<sub>0</sub> + y<sub>0</sub></code>.</li>
-                    <li><b>Midpoint on Line:</b> The midpoint is ((x+x<sub>0</sub>)/2, (y+y<sub>0</sub>)/2). Plugging this into <code>y = x + 2</code> gives (y+y<sub>0</sub>)/2 = (x+x<sub>0</sub>)/2 + 2, which simplifies to <code>y - x = x<sub>0</sub> - y<sub>0</sub> + 4</code>.</li>
-                </ol>
-                <p>Solving these two simplified equations for x<sub>0</sub> and y<sub>0</sub> gives you the transformation rules!</p>
-            </div>
-        </div>
+            <section class="derivation">
+                <h2 class="section-title">Detailed Derivation</h2>
+                <button id="toggleDetailsBtn" class="toggle-button" aria-expanded="true" aria-controls="details-container">
+                    Hide Details 
+                    <span class="icon" aria-hidden="true">▲</span>
+                </button>
 
-        <div class="step">
-            <h3>Step 3: Substitute and Solve</h3>
-            <p>
-                We know the original point (x<sub>0</sub>, y<sub>0</sub>) must satisfy its parabola's equation:
-            </p>
-            <p style="text-align:center; font-weight: bold; font-size: 1.1em;">
-                <code>y<sub>0</sub> = (x<sub>0</sub>)<sup>2</sup></code>
-            </p>
-            <p>
-                Now, substitute the expressions from Step 2 into this equation:
-            </p>
-            <p style="text-align:center;">
-                <code>(x + 2) = (y &minus; 2)<sup>2</sup></code>
-            </p>
-            <p>
-                Finally, expand the equation and solve for <code>x</code> to get it into the final format:
-            </p>
-            <p style="text-align:center;">
-                <code>x + 2 = y<sup>2</sup> &minus; 4y + 4</code>
-            </p>
-            <p>
-                Subtract 2 from both sides:
-            </p>
-            <p style="text-align:center; font-weight: bold;">
-                <code>x = y<sup>2</sup> &minus; 4y + 2</code>
-            </p>
-        </div>
+                <div id="details-container" class="details-container">
+                    <ol class="steps">
+                        <li class="step">
+                            <div class="step-number" aria-hidden="true"></div>
+                            <div class="step-content">
+                                <h4>Strategy: Ratio of Apothems</h4>
+                                <p>Since $N$ and $S$ are similar regular polygons, the ratio of their areas is the square of the ratio of their apothems (inradii), $r_N$ and $r_S$.</p>
+                                \[\frac{\text{Area}(S)}{\text{Area}(N)} = \left(\frac{r_S}{r_N}\right)^2\]
+                            </div>
+                        </li>
+                        <li class="step">
+                            <div class="step-number" aria-hidden="true"></div>
+                            <div class="step-content">
+                                <h4>Geometric Angles</h4>
+                                <p>A nonagon's central angle per side is $\frac{360^\circ}{9} = 40^\circ$. Let $O$ be the center and $V_1, V_2$ be consecutive vertices. The triangle $\triangle OV_1V_2$ has base angles of $\frac{180^\circ - 40^\circ}{2} = 70^\circ$.</p>
+                            </div>
+                        </li>
+                        <li class="step">
+                            <div class="step-number" aria-hidden="true"></div>
+                            <div class="step-content">
+                                <h4>Apothem of Outer Nonagon (N)</h4>
+                                <p>The apothem $r_N$ is the altitude from $O$ to side $V_1V_2$. In the right triangle formed by this altitude, with hypotenuse $R_N$ (circumradius), the angle at the center is $20^\circ$.</p>
+                                \[r_N = R_N \cos(20^\circ)\]
+                            </div>
+                        </li>
+                        <li class="step">
+                            <div class="step-number" aria-hidden="true"></div>
+                            <div class="step-content">
+                                <h4>Apothem of Inner Nonagon (S)</h4>
+                                <p>A side of $S$ is drawn from $V_2$ perpendicular to the edge $V_1V_2$. The angle between the radius $OV_2$ and this new side is $90^\circ - 70^\circ = 20^\circ$. The apothem $r_S$ is the perpendicular distance from $O$ to this side.</p>
+                                \[r_S = R_N \sin(20^\circ)\]
+                            </div>
+                        </li>
+                        <li class="step">
+                            <div class="step-number" aria-hidden="true"></div>
+                            <div class="step-content">
+                                <h4>Ratio Calculation</h4>
+                                <p>We compute the ratio of the apothems and square it to find the area ratio.</p>
+                                \[\frac{r_S}{r_N} = \frac{R_N \sin(20^\circ)}{R_N \cos(20^\circ)} = \tan(20^\circ)\]
+                                \[\frac{\text{Area}(S)}{\text{Area}(N)} = (\tan(20^\circ))^2 = \tan^2(20^\circ)\]
+                            </div>
+                        </li>
+                        <li class="step">
+                            <div class="step-number" aria-hidden="true"></div>
+                            <div class="step-content">
+                                <h4>Trigonometric Simplification</h4>
+                                <p>Using the half-angle identity for tangent squared, $\tan^2(x) = \frac{1 - \cos(2x)}{1 + \cos(2x)}$, we substitute $x = 20^\circ$.</p>
+                                \[\frac{\text{Area}(S)}{\text{Area}(N)} = \frac{1 - \cos(2 \cdot 20^\circ)}{1 + \cos(2 \cdot 20^\circ)} = \frac{1 - \cos(40^\circ)}{1 + \cos(40^\circ)}\]
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+        </main>
     </div>
+    
+    <footer>
+        <p>A dynamically generated solution demonstrating modern web practices.</p>
+    </footer>
 
+    <!-- KaTeX and Interactive JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js" xintegrity="sha384-hIoEbK/G8rDdXoA3sACeYdSnjilJ2bNnB2GRiQe3s+wLXDvfsEStFGoNa/aSA8c1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js" xintegrity="sha384-43gviWU0YVjaDtb/GpZv7MmxfvPJUv+UT1lDMyoUe9EVn33DONVbSAnLgTpb5g0W" crossorigin="anonymous"></script>
     <script>
-        // Simple JavaScript to toggle the visibility of the derivation text
-        const toggleButton = document.getElementById('toggleBtn');
-        const derivationText = document.getElementById('derivation');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Render all math expressions on the page
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '\\[', right: '\\]', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\(', right: '\\)', display: false}
+                ]
+            });
+            
+            // Attach event listener for the interactive toggle button
+            const toggleBtn = document.getElementById('toggleDetailsBtn');
+            const detailsContainer = document.getElementById('details-container');
+            const icon = toggleBtn.querySelector('.icon');
 
-        toggleButton.addEventListener('click', () => {
-            // Check if the content is currently hidden
-            if (derivationText.style.display === 'none' || derivationText.style.display === '') {
-                derivationText.style.display = 'block'; // Show it
-                toggleButton.textContent = 'Hide Derivation';
-            } else {
-                derivationText.style.display = 'none'; // Hide it
-                toggleButton.textContent = 'Why these formulas? (Show Derivation)';
-            }
+            toggleBtn.addEventListener('click', function() {
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+
+                if (isExpanded) {
+                    detailsContainer.classList.add('collapsed');
+                    this.setAttribute('aria-expanded', 'false');
+                    this.childNodes[0].nodeValue = 'Show Details ';
+                    icon.style.transform = 'rotate(180deg)';
+                } else {
+                    detailsContainer.classList.remove('collapsed');
+                    this.setAttribute('aria-expanded', 'true');
+                    this.childNodes[0].nodeValue = 'Hide Details ';
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            });
         });
     </script>
-
 </body>
 </html>
